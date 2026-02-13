@@ -214,28 +214,28 @@ public class CalcOnClickListener implements View.OnClickListener{
             if (isNumber(token)) {
                 stack.push(Double.parseDouble(token));
             } else if (isOperator(token)) {
-                double b = stack.pop();
-                double a = stack.pop();
+                double rhs = stack.pop();
+                double lhs = stack.pop();
 
                 double result;
                 switch (token) {
                     case "+":
-                        result = a + b;
+                        result = lhs + rhs;
                         break;
                     case "-":
-                        result = a - b;
+                        result = lhs - rhs;
                         break;
                     case "*":
-                        result = a * b;
+                        result = lhs * rhs;
                         break;
                     case "/":
-                        if (b == 0) {
+                        if (rhs == 0) {
                             throw new IllegalArgumentException("Division by zero");
                         }
-                        result = a / b;
+                        result = lhs / rhs;
                         break;
                     case "^":
-                        result = Math.pow(a, b);
+                        result = Math.pow(lhs, rhs);
                         break;
                     default:
                         throw new IllegalArgumentException("Unknown operator: " + token);
